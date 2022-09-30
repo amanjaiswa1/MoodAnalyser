@@ -4,23 +4,23 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MoodAnalyserTest {
-
 	@Test
-	public void givenMessageShouldReturnTrue() {
+	public void givenMessageNullShouldReturnMessage() {
 		try {
-			String mood = new MoodAnalyser("Sad").analyseMood();
-			assertEquals("SAD", mood);
+			new MoodAnalyser(null).analyseMood();
 		} catch (MoodAnalysisException e) {
-			e.printStackTrace();
+			assertEquals(MoodAnalysisException.ExceptionType.EntryNULL, e.exceptionType);
+			System.out.println(e.getMessage());
 		}
 	}
 
 	@Test
-	public void givenMessageShouldReturnMessage() {
+	public void givenMessageBlankShouldReturnMessage() {
 		try {
-			new MoodAnalyser(null).analyseMood();
+			new MoodAnalyser("").analyseMood();
 		} catch (MoodAnalysisException e) {
-			e.printStackTrace();
+			assertEquals(MoodAnalysisException.ExceptionType.EntryEMPTY, e.exceptionType);
+			System.out.println(e.getMessage());
 		}
 	}
 }
